@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    triggers {
+        pollSCM('* * * * *')
+    }
+    stages {
+        stage ("pull code") {
+            steps {
+                git branch: 'main', changelog: false, url: 'https://github.com/adil-khan-723/new-repo.git'
+                echo "pulling code"
+            }
+        }
+
+        stage ("build") {
+            steps {
+                echo "building ...."
+            }
+        }
+
+        stage ("test") {
+            steps {
+                echo "testing ...."
+            }
+        }
+
+        stage ("deploy") {
+            steps {
+                echo "deploying ...."
+            }
+        }
+    }
+    post{
+        success {
+            echo "success"
+        }
+        failure {
+            echo "failure"
+        }
+    }
+}
