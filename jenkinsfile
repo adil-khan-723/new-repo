@@ -9,7 +9,7 @@ pipeline{
         }
 
         stage("pull code"){
-            git branch: 'main', url: 'https://github.com/oggy3682/python-repo.git'  
+            git branch: 'main', url: 'https://github.com/adil-khan-723/new-repo.git'  
             echo "pull complete"
         }
 
