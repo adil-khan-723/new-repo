@@ -1,36 +1,52 @@
-pipeline{
-    triggers{
+pipeline {
+    triggers {
         pollSCM '* * * * *'
     }
-    stages{
-        stage("intro"){
-            echo "hello"
-            sh echo "hello oggy"
+    stages {
+        stage('intro') {
+            steps {
+                echo 'hello'
+                sh 'echo "hello oggy"'
+            }
         }
 
+<<<<<<< HEAD
         stage("pull code"){
             git branch: 'main', url: 'https://github.com/adil-khan-723/new-repo.git'  
             echo "pull complete"
+=======
+        stage('pull code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/oggy3682/python-repo.git'
+                echo 'pull complete'
+            }
+>>>>>>> ce94382 (modified jenkins file)
         }
 
-        stage("build"){
-            echo"This is a build stage"
-        }
-        
-        stage("test"){
-            echo"This is the test stage"
+        stage('build') {
+            steps {
+                echo'This is a build stage'
+            }
         }
 
-        stage("last"){
-            echo"final"
+        stage('test') {
+            steps {
+                echo'This is the test stage'
+            }
+        }
+
+        stage('last') {
+            steps {
+                echo'final'
+            }
         }
     }
-    post{
+    post {
         success {
-            echo "pipeline successful"
+            echo 'pipeline successful'
         }
         failure {
-            echo "pipeline failure"
+            echo 'pipeline failure'
         }
     }
 }
