@@ -4,37 +4,40 @@ pipeline {
         pollSCM('* * * * *')
     }
     stages {
-        stage ("pull code") {
+        stage('pull code') {
             steps {
-                git branch: 'main', changelog: false, url: 'https://github.com/adil-khan-723/new-repo.git'
-                echo "pulling code"
+                checkout([$class: 'GitSCM',
+                  branches: [[name: '*/main']],
+                  doGenerateSubmoduleConfigurations: false,
+                  extensions: [],
+                  userRemoteConfigs: [[url: 'https://github.com/adil-khan-723/new-repo.git']]])
+                echo 'pulling code'
+            }
+        }
+        stage('build') {
+            steps {
+                echo 'building ....'
             }
         }
 
-        stage ("build") {
+        stage('test') {
             steps {
-                echo "building ...."
+                echo 'testing ....'
             }
         }
 
-        stage ("test") {
+        stage('deploy') {
             steps {
-                echo "testing ...."
-            }
-        }
-
-        stage ("deploy") {
-            steps {
-                echo "deploying ...."
+                echo 'deploying ....'
             }
         }
     }
-    post{
+    post {
         success {
-            echo "success"
+            echo 'success'
         }
         failure {
-            echo "failure"
+            echo 'failure'
         }
     }
 }
