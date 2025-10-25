@@ -1,0 +1,36 @@
+pipeline{
+    triggers{
+        pollSCM '* * * * *'
+    }
+    stages{
+        stage("intro"){
+            echo "hello"
+            sh echo "hello oggy"
+        }
+
+        stage("pull code"){
+            git branch: 'main', url: 'https://github.com/oggy3682/python-repo.git'  
+            echo "pull complete"
+        }
+
+        stage("build"){
+            echo"This is a build stage"
+        }
+        
+        stage("test"){
+            echo"This is the test stage"
+        }
+
+        stage("last"){
+            echo"final"
+        }
+    }
+    post{
+        success {
+            echo "pipeline successful"
+        }
+        failure {
+            echo "pipeline failure"
+        }
+    }
+}
